@@ -1,5 +1,5 @@
 {
-  "name": "db2md-migrator",
+  "name": "kanka2md-migrator",
   "packageManager": "yarn@4.0.0-rc.43",
   "type": "module",
   "dependencies": {
