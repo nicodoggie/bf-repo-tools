@@ -1,0 +1,27 @@
+{
+  "name": "db2md-migrator",
+  "packageManager": "yarn@4.0.0-rc.43",
+  "type": "module",
+  "dependencies": {
+    "@ltd/j-toml": "^1.38.0",
+    "commander": "^10.0.1",
+    "dotenv": "^16.0.3",
+    "json2toml": "^4.0.1",
+    "knex": "^2.4.2",
+    "mysql2": "^3.3.1",
+    "slugify": "^1.6.6",
+    "turndown": "^7.1.2"
+  },
+  "scripts": {
+    "start": "ts-node --esm src/index.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^18",
+    "@types/turndown": "^5.0.1",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.0.4"
+  },
+  "volta": {
+    "node": "18.16.0"
+  }
+}
