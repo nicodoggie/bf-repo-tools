@@ -5,6 +5,6 @@ export default function (str: string) {
   return slugifyCall(str, {
     replacement: '-',
     lower: true,
-    remove: /['"]/,
+    remove: /['":?\/]/,
   });
 }

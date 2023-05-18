@@ -4,9 +4,9 @@ import slugify from "../lib/slugify.js";
 type OrganizationFrontmatter = {
   title: string;
   slug: string;
-  taxonomy: {
-    organization_id: string;
-    organization_type?: string;
+  organization_id: string[];
+  taxonomies: {
+    organization_type?: string[];
   };
 }
 
@@ -19,13 +19,12 @@ export default async (targetDir: string) => {
     const frontmatter = <OrganizationFrontmatter>{
       title: org.name,
       slug: slugify(org.name),
-      taxonomy: {
-        organization_id: org.id.toString(),
-      }
+      organization_id: [org.id.toString()],
+      taxonomies: {}
     };
 
     if (org.type) {
-      frontmatter.taxonomy['organization_type'] = org.type;
+      frontmatter.taxonomies['organization_type'] = [org.type];
     }
 
     return {

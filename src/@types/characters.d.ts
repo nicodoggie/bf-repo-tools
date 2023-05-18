@@ -9,6 +9,7 @@ declare module 'knex/types/tables' {
     sex?: string;
     entry?: string;
     pronouns?: string;
+    family_id?: number;
     title?: string;
     created_at: string;
     updated_at: string;
