@@ -6,32 +6,31 @@ import slugify from "../lib/slugify.js";
 import { writeFileSync } from "fs";
 import path from "path";
 
+const entityMap = {
+  org: "organizations",
+  loc: "locations",
+  fam: 'families',
+  cha: 'characters',
+  evt: 'events',
+} as { [key: string]: string }
+
 const newFile = new Command('new');
 newFile
   .argument('<type>')
   .argument('<title>')
-  .action(async (type: string, title: string) => {
-    let data = {};
-    let dir = '';
+  .option('-o, --outDir <outDir>', "target output directory", "content")
+  .action(async (type: string, title: string, options: any) => {
     let slug = slugify(title);
-    switch (type.trim().toLowerCase()) {
-      case "organization":
-      case "org":
-        dir = 'organizations';
-        data = <OrganizationFrontmatter>{
-          title,
-          slug,
-          extra: {},
-          taxonomies: {
-            leaders: [],
-            organization_type: [],
-          },
-        }
-        break;
+    let entity = `../entities/${type}.js`;
+    if (type in entityMap) {
+      entity = `../entities/${entityMap[type]}.js`;
     }
+    const mod = await import(entity);
+    const { dir, data } = mod.create(title);
+
     const content = matter.stringify("", data, frontmatter.options);
 
-    writeFileSync(path.resolve(process.cwd(), 'content', dir, slug + ".md"), content);
+    writeFileSync(path.resolve(process.cwd(), options.outDir, dir, slug + ".md"), content);
   });
 
 export default newFile;

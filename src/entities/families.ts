@@ -3,12 +3,23 @@ import slugify from "../lib/slugify.js";
 
 type FamilyFrontmatter = {
   title: string;
-  slug: string;
-  family_id: string;
+  slug?: string;
+
   taxonomies: {
+    family_id?: string[];
     family_location_id?: string[];
     parent_family_id?: string[];
   };
+}
+
+export function create(title: string) {
+  return {
+    dir: 'families',
+    data: <FamilyFrontmatter>{
+      title,
+      taxonomies: {}
+    }
+  }
 }
 
 export default async () => {
@@ -19,8 +30,9 @@ export default async () => {
     const frontmatter = <FamilyFrontmatter>{
       title: family.name,
       slug: slugify(family.name),
-      family_id: family.id.toString(),
-      taxonomies: {}
+      taxonomies: {
+        family_id: [family.id.toString()],
+      }
     };
 
     if (family.location_id) {

@@ -3,14 +3,36 @@ import slugify from "../lib/slugify.js";
 
 export type JournalFrontmatter = {
   title: string;
-  slug: string;
-  ingame_date: string;
-  journal_id: string;
+  slug?: string;
+  extra: {
+    date?: string;
+    ingame_date?: string;
+  },
   taxonomies: {
-    journal_type?: string[];
+    type: ["journal"];
+    journal_type: string[];
+    journal_id: string[];
     character_id?: string[];
     location_id?: string[];
   };
+}
+
+export function create(title: string) {
+  const slug = slugify(title);
+
+  return {
+    dir: 'misc',
+    data: <JournalFrontmatter>{
+      title,
+      extra: {
+        date: '',
+        ingame_date: '',
+      },
+      taxonomies: {
+        type: ["journal"],
+      },
+    }
+  }
 }
 
 export default async () => {
@@ -21,14 +43,16 @@ export default async () => {
     const frontmatter = <JournalFrontmatter>{
       title: journal.name,
       slug: slugify(journal.name),
-      journal_id: journal.id.toString(),
-      taxonomies: {}
+      extra: {},
+      taxonomies: {
+        journal_id: [journal.id.toString()],
+      }
     };
 
     if (journal.calendar_year && journal.calendar_month && journal.calendar_day) {
-      frontmatter.ingame_date = `${journal.calendar_year}-${journal.calendar_month}-${journal.calendar_day}`;
+      frontmatter.extra.ingame_date = `${journal.calendar_year}-${journal.calendar_month}-${journal.calendar_day}`;
     } else {
-      frontmatter.ingame_date = '';
+      frontmatter.extra.ingame_date = '';
     }
 
     if (journal.type) {

@@ -3,7 +3,7 @@ import slugify from "../lib/slugify.js";
 
 export type OrganizationFrontmatter = {
   title: string;
-  slug: string;
+  slug?: string;
   extra: {
     date_established?: string;
     date_dissolved?: string;
@@ -13,6 +13,22 @@ export type OrganizationFrontmatter = {
     leaders?: string[];
     organization_type?: string[];
   };
+}
+
+export function create(title: string) {
+  const slug = slugify(title);
+
+  return {
+    dir: 'organizations',
+    data: <OrganizationFrontmatter>{
+      title,
+      extra: {},
+      taxonomies: {
+        leaders: [],
+        organization_type: [],
+      },
+    }
+  }
 }
 
 export default async (targetDir: string) => {
