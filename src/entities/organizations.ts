@@ -1,11 +1,16 @@
 import knex from "../lib/knex.js";
 import slugify from "../lib/slugify.js";
 
-type OrganizationFrontmatter = {
+export type OrganizationFrontmatter = {
   title: string;
   slug: string;
-  organization_id: string[];
+  extra: {
+    date_established?: string;
+    date_dissolved?: string;
+  };
   taxonomies: {
+    organization_id?: string[];
+    leaders?: string[];
     organization_type?: string[];
   };
 }
@@ -19,8 +24,9 @@ export default async (targetDir: string) => {
     const frontmatter = <OrganizationFrontmatter>{
       title: org.name,
       slug: slugify(org.name),
-      organization_id: [org.id.toString()],
-      taxonomies: {}
+      taxonomies: {
+        organization_id: [org.id.toString()],
+      }
     };
 
     if (org.type) {

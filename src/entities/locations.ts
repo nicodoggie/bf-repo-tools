@@ -1,7 +1,7 @@
 import knex from "../lib/knex.js";
-import slugify from "../lib/slugify.ts";
+import slugify from "../lib/slugify.js";
 
-type LocationFrontmatter = {
+export type LocationFrontmatter = {
   title: string;
   slug: string;
   location_id: string;

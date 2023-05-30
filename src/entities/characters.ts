@@ -1,7 +1,7 @@
 import knex from "../lib/knex.js";
-import slugify from "../lib/slugify.ts";
+import slugify from "../lib/slugify.js";
 
-type CharacterFrontmatter = {
+export type CharacterFrontmatter = {
   title: string;
   slug: string;
   age: number;

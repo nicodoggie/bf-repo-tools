@@ -1,5 +1,5 @@
 import knex from "../lib/knex.js";
-import slugify from "../lib/slugify.ts";
+import slugify from "../lib/slugify.js";
 
 type FamilyFrontmatter = {
   title: string;

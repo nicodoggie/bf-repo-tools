@@ -1,7 +1,7 @@
 import knex from "../lib/knex.js";
-import slugify from "../lib/slugify.ts";
+import slugify from "../lib/slugify.js";
 
-type NoteFrontmatter = {
+export type NoteFrontmatter = {
   title: string;
   slug: string;
   note_id: string;

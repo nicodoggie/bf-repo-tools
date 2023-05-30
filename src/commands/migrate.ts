@@ -1,5 +1,5 @@
 import { Command } from "commander";
-import markdown from "../lib/markdown.ts";
+import markdown from "../lib/markdown.js";
 import { writeFile } from "fs/promises";
 
 const migrate = new Command('migrate');

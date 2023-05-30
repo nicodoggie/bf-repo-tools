@@ -1,7 +1,7 @@
 import knex from "../lib/knex.js";
-import slugify from "../lib/slugify.ts";
+import slugify from "../lib/slugify.js";
 
-type JournalFrontmatter = {
+export type JournalFrontmatter = {
   title: string;
   slug: string;
   ingame_date: string;

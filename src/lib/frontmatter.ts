@@ -18,7 +18,7 @@ export const options = {
   }
 };
 
-export default async (file: string) => {
+export const read = async (file: string) => {
   const content = await readFile(file);
   return matter(content, options);
 };
