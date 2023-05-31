@@ -1,5 +1,6 @@
 {
-  "name": "bf-repo-tools",
+  "name": "@nicodoggie/bf-repo-tools",
+  "version": "1.0.0",
   "packageManager": "yarn@4.0.0-rc.43",
   "type": "module",
   "bin": {
